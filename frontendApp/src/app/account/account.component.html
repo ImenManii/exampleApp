@@ -1,0 +1,60 @@
+<form [formGroup]="accountForm" (ngSubmit)="openNewAccount()" class="account-form">
+    <div>
+        <label>
+            Customer ID:
+            <input type="text" formControlName="customerID" name="customerID" />
+            <div class="error-message" *ngIf="isButtonClicked &&accountForm.get('customerID')?.errors?.['required']">
+                <span> Please enter Customer ID ! </span>
+                <span> </span>
+            </div>
+        </label>
+    </div>
+    <div>
+        <label>
+            Name:
+            <input type="text" formControlName="name" name="name" />
+            <div class="error-message" *ngIf="isButtonClicked &&accountForm.get('name')?.errors?.['required']">
+                    <span> Please enter Name ! </span>
+                    <span> </span>
+                </div>
+        </label>
+    </div>
+    <div>
+        <label>
+            Surname:
+            <input type="text" formControlName="surname" name="surname" />
+            <div class="error-message" *ngIf="isButtonClicked &&accountForm.get('surname')?.errors?.['required']">
+                    <span> Please enter Surname ! </span>
+                    <span> </span>
+                </div>
+        </label>
+    </div>
+    <div>
+        <label>
+            Initial Credit:
+            <input type="number" formControlName="initialCredit" name="initialCredit" />
+            <div class="error-message" *ngIf="isButtonClicked &&accountForm.get('initialCredit')?.errors?.['required']">
+                    <span> Please enter Initial Credit ! </span>
+                    <span> </span>
+                </div>
+        </label>
+    </div>
+    <button type="submit">Open Account</button>
+</form>
+
+<div *ngIf="accountCreated">
+    <span> Account created or updated successfully ! </span>
+    <div>Name : {{accountDetails?.name}}</div>
+    <div>SurName : {{accountDetails?.surname}}</div>
+    <div>Balance : {{accountDetails?.balance}}</div>
+    <div *ngIf="accountDetails?.transactions">
+        <span>Transactions :</span>
+        <div *ngFor="let transaction of accountDetails?.transactions">
+            <span>Amount : {{transaction.amount}}</span>
+        </div>
+    </div>
+</div>
+
+<div>
+        <button type="submit" (click)="reset()">Reset</button>
+</div>
